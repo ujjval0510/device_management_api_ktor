@@ -4,6 +4,7 @@ import com.neci.extensions.connectToExampleDatabase
 import com.neci.features.device.dao.entity.DeviceMasterTable
 import com.neci.features.device.dao.mapper.DeviceMapper
 import com.neci.features.device.model.DeviceInfoDao
+import com.neci.features.device.model.DeviceRequestDto
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDateTime
@@ -21,6 +22,9 @@ class DeviceDaoImpl(private val mapper: DeviceMapper) : DeviceDao {
         return deviceList
     }
 
+    override fun createDevice(requestDto: DeviceRequestDto): DeviceInfoDao {
+        TODO("Not yet implemented")
+    }
 
 
 //    override fun getDeviceInfo(deviceId: Int): Device {
