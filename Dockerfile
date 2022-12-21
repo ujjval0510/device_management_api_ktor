@@ -4,7 +4,7 @@ WORKDIR /home/gradle/src
 RUN gradle shadowJar --no-daemon
 
 FROM amazoncorretto:11
-EXPOSE 8081:8081
+EXPOSE 8080:8080
 RUN mkdir /app
 COPY --from=build /home/gradle/src/build/libs/*.jar /app/kotlin-ktor-rest-api.jar
 ENTRYPOINT ["java","-jar","/app/kotlin-ktor-rest-api.jar"]

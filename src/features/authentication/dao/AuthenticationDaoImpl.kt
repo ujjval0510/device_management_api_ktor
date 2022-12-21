@@ -1,7 +1,7 @@
 package com.neci.features.authentication.dao
 
 import com.neci.extensions.connectToExampleDatabase
-import com.neci.features.authentication.dao.entity.User
+import com.neci.features.authentication.dao.entity.UserTable
 import com.neci.features.authentication.dao.mapper.AuthenticationMapper
 import com.neci.features.authentication.model.LoginRequestDto
 import com.neci.features.authentication.model.UserInfoDto
@@ -15,7 +15,7 @@ class AuthenticationDaoImpl(private val mapper: AuthenticationMapper) : Authenti
 
         val count: Long = transaction {
             addLogger(StdOutSqlLogger)
-            return@transaction User.select { User.email eq request.email }.count()
+            return@transaction UserTable.select { UserTable.email eq request.email }.count()
         }
         return count.toInt() == 1
     }
@@ -25,7 +25,7 @@ class AuthenticationDaoImpl(private val mapper: AuthenticationMapper) : Authenti
 
         val userInfo = transaction {
             addLogger(StdOutSqlLogger)
-            return@transaction mapper.fromUserDaoToUserInfo(User.select { User.email eq email }.single())
+            return@transaction mapper.fromUserDaoToUserInfo(UserTable.select { UserTable.email eq email }.single())
         }
         return userInfo
     }
@@ -35,9 +35,9 @@ class AuthenticationDaoImpl(private val mapper: AuthenticationMapper) : Authenti
 
         transaction {
             addLogger(StdOutSqlLogger)
-            SchemaUtils.create(User)
-            User.insert {
-                it[employee_id] = userInfoDto.employee_id
+            SchemaUtils.create(UserTable)
+            UserTable.insert {
+                it[employee_id] = userInfoDto.employeeId
                 it[email] = userInfoDto.email
                 it[role] = userInfoDto.role
                 it[password] = userInfoDto.password!!

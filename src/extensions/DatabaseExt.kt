@@ -6,9 +6,9 @@ import org.jetbrains.exposed.sql.Database
 fun Database.Companion.connectToExampleDatabase() {
     val conf = ConfigFactory.load()
     connect(
-        url = conf.getString("database.exampleDatabaseUrl"),
-        driver = conf.getString("database.exampleDatabaseDriver"),
-        user = conf.getString("database.exampleDatabaseUser"),
-        password = conf.getString("database.exampleDatabasePassword")
+        url = conf.getString("database.databaseUrl"),
+        driver = conf.getString("database.databaseDriver"),
+        user = conf.getString("database.databaseUser"),
+        password = conf.getString("database.databasePassword")
     )
 }

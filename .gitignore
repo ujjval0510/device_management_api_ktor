@@ -3,7 +3,8 @@ local.properties
 .DS_STORE
 # Log/OS Files
 *.log
-
+build
+.gradle
 # Android Studio generated files and folders
 captures/
 .externalNativeBuild/
