@@ -5,8 +5,11 @@ import com.neci.features.device.dao.entity.DeviceMasterTable
 import com.neci.features.device.dao.mapper.DeviceMapper
 import com.neci.features.device.model.DeviceInfoDao
 import com.neci.features.device.model.DeviceRequestDto
+import com.neci.features.device.model.UpdateDeviceRequestDto
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.koin.core.component.getScopeId
 import java.time.LocalDateTime
 
 class DeviceDaoImpl(private val mapper: DeviceMapper) : DeviceDao {
@@ -44,6 +47,26 @@ class DeviceDaoImpl(private val mapper: DeviceMapper) : DeviceDao {
 
         println("deviceInfoDao : $deviceInfoDao")
 
+        return deviceInfoDao;
+    }
+
+    override fun updateDevice(requestDto: UpdateDeviceRequestDto): DeviceInfoDao {
+        Database.connectToExampleDatabase()
+        val deviceInfoDao = transaction {
+            DeviceMasterTable.update({ DeviceMasterTable.id eq requestDto.id }) {
+                it[name] = requestDto.name
+                it[os] = requestDto.os
+                it[os_version] = requestDto.osVersion
+                it[device_number] = requestDto.deviceNumber
+                it[updated_at] = LocalDateTime.now().toString()
+            }
+            transaction {
+                addLogger(StdOutSqlLogger)
+                return@transaction mapper.fromDeviceDaoToDeviceInfo(DeviceMasterTable.select { DeviceMasterTable.id eq requestDto.id }
+                    .single())
+
+            }
+        }
         return deviceInfoDao;
     }
 
