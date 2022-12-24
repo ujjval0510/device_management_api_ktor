@@ -1,11 +1,13 @@
 package com.neci.features.device.model
 
 import com.neci.features.device.dao.entity.DeviceMasterTable
+import org.jetbrains.exposed.dao.id.EntityID
+import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.ResultRow
 
 data class DeviceInfoDao(
-    val id: Int? = null,
-    val name: String? = null,
+    val id: Int,
+    val name: String,
     val os: String? = null,
     val osVersion: String? = null,
     val isDeleted: Int? = 0,
@@ -21,8 +23,8 @@ data class DeviceInfoDao(
             osVersion = resultRow[DeviceMasterTable.os_version],
             isDeleted = resultRow[DeviceMasterTable.is_deleted],
             deviceNumber = resultRow[DeviceMasterTable.device_number],
-            createdAt = resultRow[DeviceMasterTable.created_at],
-            updatedAt = resultRow[DeviceMasterTable.updated_at],
+            createdAt = resultRow[DeviceMasterTable.created_at].toString(),
+            updatedAt = resultRow[DeviceMasterTable.updated_at].toString(),
         )
     }
 }

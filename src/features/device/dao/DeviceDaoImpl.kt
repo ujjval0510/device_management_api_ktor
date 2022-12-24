@@ -15,15 +15,36 @@ class DeviceDaoImpl(private val mapper: DeviceMapper) : DeviceDao {
         Database.connectToExampleDatabase()
         val deviceList = transaction {
             addLogger(StdOutSqlLogger)
-            println("List of data : ====== " +  LocalDateTime.now());
             return@transaction mapper.fromDeviceDaoToDeviceList(DeviceMasterTable.selectAll().toList())
         }
 
         return deviceList
     }
 
+
     override fun createDevice(requestDto: DeviceRequestDto): DeviceInfoDao {
-        TODO("Not yet implemented")
+        Database.connectToExampleDatabase()
+        val deviceInfoDao = transaction {
+            addLogger(StdOutSqlLogger)
+            val id = DeviceMasterTable.insert {
+                it[name] = requestDto.name
+                it[os] = requestDto.os
+                it[os_version] = requestDto.osVersion
+                it[device_number] = requestDto.deviceNumber
+                it[created_at] = LocalDateTime.now().toString()
+                it[updated_at] = LocalDateTime.now().toString()
+                it[is_deleted] = 0
+            } get DeviceMasterTable.id
+            transaction {
+                addLogger(StdOutSqlLogger)
+                return@transaction mapper.fromDeviceDaoToDeviceInfo(DeviceMasterTable.select { DeviceMasterTable.id eq id }
+                    .single())
+            }
+        }
+
+        println("deviceInfoDao : $deviceInfoDao")
+
+        return deviceInfoDao;
     }
 
 

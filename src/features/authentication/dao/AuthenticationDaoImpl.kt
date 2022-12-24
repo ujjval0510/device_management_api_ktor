@@ -5,8 +5,12 @@ import com.neci.features.authentication.dao.entity.UserTable
 import com.neci.features.authentication.dao.mapper.AuthenticationMapper
 import com.neci.features.authentication.model.LoginRequestDto
 import com.neci.features.authentication.model.UserInfoDto
+import com.neci.features.device.dao.entity.DeviceMasterTable
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.time.LocalDateTime
+import java.time.LocalTime
 
 class AuthenticationDaoImpl(private val mapper: AuthenticationMapper) : AuthenticationDao {
 
@@ -30,17 +34,24 @@ class AuthenticationDaoImpl(private val mapper: AuthenticationMapper) : Authenti
         return userInfo
     }
 
-    override fun createUser(userInfoDto: UserInfoDto) {
+    override fun createUser(userInfoDto: UserInfoDto): UserInfoDto {
         Database.connectToExampleDatabase()
 
-        transaction {
+        return transaction {
             addLogger(StdOutSqlLogger)
             SchemaUtils.create(UserTable)
-            UserTable.insert {
+            val email = UserTable.insert {
                 it[employee_id] = userInfoDto.employeeId
                 it[email] = userInfoDto.email
                 it[role] = userInfoDto.role
                 it[password] = userInfoDto.password!!
+                it[created_at] = LocalDateTime.now().toString()
+                it[updated_at] = LocalDateTime.now().toString()
+            } get UserTable.email
+            transaction {
+                addLogger(StdOutSqlLogger)
+                return@transaction mapper.fromUserDaoToUserInfo(UserTable.select { UserTable.email eq email }
+                    .single())
             }
         }
     }

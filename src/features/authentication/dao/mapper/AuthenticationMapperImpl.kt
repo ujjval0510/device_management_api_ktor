@@ -7,7 +7,7 @@ import org.jetbrains.exposed.sql.ResultRow
 class AuthenticationMapperImpl : AuthenticationMapper {
 
     override fun fromUserDaoToUserInfo(resultRow: ResultRow) = UserInfoDto(
-//        id = resultRow[User.id],
+        id = resultRow[UserTable.id],
         email = resultRow[UserTable.email],
         employeeId = resultRow[UserTable.employee_id],
         role = resultRow[UserTable.role],

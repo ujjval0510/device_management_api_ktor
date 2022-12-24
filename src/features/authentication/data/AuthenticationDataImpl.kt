@@ -19,7 +19,7 @@ class AuthenticationDataImpl(private val authenticationDao: AuthenticationDao, p
         return authenticationDao.getUserInfo(email).apply { password = null }
     }
 
-    override fun createUser(userInfoDto: UserInfoDto) {
+    override fun createUser(userInfoDto: UserInfoDto) : UserInfoDto {
         return authenticationDao.createUser(userInfoDto)
     }
 }
