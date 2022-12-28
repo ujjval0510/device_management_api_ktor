@@ -8,5 +8,5 @@ interface DeviceDao {
     fun getDeviceList(): List<DeviceInfoDao>
     fun createDevice(requestDto: DeviceRequestDto): DeviceInfoDao
     fun updateDevice(requestDto: UpdateDeviceRequestDto): DeviceInfoDao
-//    fun getDeviceInfo(deviceId: Int): DeviceInfoDto
+    fun getDeviceInfo(deviceId: Int): DeviceInfoDao
 }

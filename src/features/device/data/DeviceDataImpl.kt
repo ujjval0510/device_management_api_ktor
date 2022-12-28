@@ -18,7 +18,7 @@ class DeviceDataImpl(private val deviceDao: DeviceDao) : DeviceData {
         return deviceDao.updateDevice(requestDto);
     }
 
-//    override suspend fun getDeviceInfo(deviceId: Int): DeviceInfoDto {
-//        return deviceDao.getDeviceInfo(deviceId = deviceId)
-//    }
+    override suspend fun getDeviceInfo(deviceId: Int): DeviceInfoDao {
+        return deviceDao.getDeviceInfo(deviceId = deviceId)
+    }
 }

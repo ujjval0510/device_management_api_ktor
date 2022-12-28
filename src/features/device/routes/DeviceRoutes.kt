@@ -2,6 +2,7 @@ package com.neci.features.device.routes
 
 import com.neci.features.device.routes.createdevice.createDevice
 import com.neci.features.device.routes.getalldevices.getAllDevices
+import com.neci.features.device.routes.getdeviceinfo.getDevicesInfo
 import com.neci.features.device.routes.updatedevice.updateDevice
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -13,6 +14,7 @@ fun Application.deviceDataModule() {
             getAllDevices()
             createDevice()
             updateDevice()
+            getDevicesInfo()
         }
     }
 }
