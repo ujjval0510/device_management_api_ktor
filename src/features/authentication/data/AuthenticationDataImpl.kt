@@ -2,6 +2,7 @@ package com.neci.features.authentication.data
 
 import com.neci.features.authentication.dao.AuthenticationDao
 import com.neci.features.authentication.model.LoginRequestDto
+import com.neci.features.authentication.model.UpdateUserInfoDto
 import com.neci.features.authentication.model.UserInfoDto
 import com.neci.jwt.JwtManager
 
@@ -21,5 +22,11 @@ class AuthenticationDataImpl(private val authenticationDao: AuthenticationDao, p
 
     override fun createUser(userInfoDto: UserInfoDto) : UserInfoDto {
         return authenticationDao.createUser(userInfoDto)
+    }
+    override fun updateUser(userInfoDto: UpdateUserInfoDto): UserInfoDto {
+        return authenticationDao.updateUser(userInfoDto)
+    }
+    override fun deleteUser(userID: Int) {
+        return authenticationDao.deleteUser(userID)
     }
 }
