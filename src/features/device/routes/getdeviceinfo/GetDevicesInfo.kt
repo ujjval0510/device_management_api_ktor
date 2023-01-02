@@ -10,8 +10,7 @@ import org.koin.java.KoinJavaComponent.inject
 
 fun Route.getDevicesInfo() {
     val deviceData: DeviceData by inject(DeviceData::class.java)
-    get("/api/v1/device/get_device_info") {
-        // TODO : How to get id from URL get api..
-        call.respond(deviceData.getDeviceInfo(1)); // static id as of now.
+    get("/api/v1/device/get_device_info/{id}") {
+        call.respond(deviceData.getDeviceInfo(deviceId =  call.parameters["id"]!!.toInt()));
     }
 }

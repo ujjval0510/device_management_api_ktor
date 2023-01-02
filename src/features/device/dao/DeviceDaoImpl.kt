@@ -7,9 +7,7 @@ import com.neci.features.device.model.DeviceInfoDao
 import com.neci.features.device.model.DeviceRequestDto
 import com.neci.features.device.model.UpdateDeviceRequestDto
 import org.jetbrains.exposed.sql.*
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
-import org.koin.core.component.getScopeId
 import java.time.LocalDateTime
 
 class DeviceDaoImpl(private val mapper: DeviceMapper) : DeviceDao {
@@ -70,16 +68,13 @@ class DeviceDaoImpl(private val mapper: DeviceMapper) : DeviceDao {
         return deviceInfoDao;
     }
 
-    override fun getDeviceInfo(deviceId: Int): DeviceInfoDao {
-        TODO("Not yet implemented")
-    }
-
     override fun deleteDevice(deviceId: Int) {
         Database.connectToExampleDatabase()
         transaction {
             addLogger(StdOutSqlLogger)
-            val deviceIFO =mapper.fromDeviceDaoToDeviceInfo(DeviceMasterTable.select { DeviceMasterTable.id eq deviceId }
-                .single())
+            val deviceIFO =
+                mapper.fromDeviceDaoToDeviceInfo(DeviceMasterTable.select { DeviceMasterTable.id eq deviceId }
+                    .single())
             DeviceMasterTable.update({ DeviceMasterTable.id eq deviceId }) {
                 if (deviceIFO.isDeleted?.equals(0) == true) {
                     it[is_deleted] = 1
@@ -89,15 +84,15 @@ class DeviceDaoImpl(private val mapper: DeviceMapper) : DeviceDao {
         }
     }
 
-//    override fun getDeviceInfo(deviceId: Int): Device {
-//        Database.connectToExampleDatabase()
+    override fun getDeviceInfo(deviceId: Int): DeviceInfoDao {
+        Database.connectToExampleDatabase()
 
-//        val deviceInfo = transaction {
-//            addLogger(StdOutSqlLogger)
-//            return@transaction mapper.fromDeviceDaoToDeviceInfo(Device.select { Device.id eq deviceId }.single())
-//        }
-//        return deviceInfo
-//    }
+        val deviceInfo = transaction {
+            addLogger(StdOutSqlLogger)
+            return@transaction mapper.fromDeviceDaoToDeviceInfo(DeviceMasterTable.select { DeviceMasterTable.id eq deviceId }.single())
+        }
+        return deviceInfo
+    }
 
 //    override fun addDevice(deviceInfoDto: DeviceInfoDto) {
 //        Database.connectToExampleDatabase()
