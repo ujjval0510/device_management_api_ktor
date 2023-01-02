@@ -9,4 +9,7 @@ interface DeviceDao {
     fun createDevice(requestDto: DeviceRequestDto): DeviceInfoDao
     fun updateDevice(requestDto: UpdateDeviceRequestDto): DeviceInfoDao
     fun getDeviceInfo(deviceId: Int): DeviceInfoDao
+    fun deleteDevice(deviceId: Int)
+
+
 }

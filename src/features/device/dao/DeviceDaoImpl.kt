@@ -70,6 +70,24 @@ class DeviceDaoImpl(private val mapper: DeviceMapper) : DeviceDao {
         return deviceInfoDao;
     }
 
+    override fun getDeviceInfo(deviceId: Int): DeviceInfoDao {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteDevice(deviceId: Int) {
+        Database.connectToExampleDatabase()
+        transaction {
+            addLogger(StdOutSqlLogger)
+            val deviceIFO =mapper.fromDeviceDaoToDeviceInfo(DeviceMasterTable.select { DeviceMasterTable.id eq deviceId }
+                .single())
+            DeviceMasterTable.update({ DeviceMasterTable.id eq deviceId }) {
+                if (deviceIFO.isDeleted?.equals(0) == true) {
+                    it[is_deleted] = 1
+                    it[updated_at] = LocalDateTime.now().toString()
+                }
+            }
+        }
+    }
 
 //    override fun getDeviceInfo(deviceId: Int): Device {
 //        Database.connectToExampleDatabase()
@@ -95,5 +113,4 @@ class DeviceDaoImpl(private val mapper: DeviceMapper) : DeviceDao {
 //            }
 //        }
 //    }
-
-}
+    }
