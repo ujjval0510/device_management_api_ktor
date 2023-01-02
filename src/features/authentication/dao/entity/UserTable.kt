@@ -10,6 +10,11 @@ object UserTable : Table("user") {
     val password = varchar("password",50)
     val created_at = varchar("created_at", 50)
     val updated_at = varchar("updated_at", 50)
+    val is_deleted = bool("is_deleted")
+    val first_name = varchar("first_name", 50)
+    val last_name = varchar("last_name", 50)
+    val company_name = varchar("company_name", 50)
+    val designation = varchar("designation", 50)
 
     override val primaryKey = PrimaryKey(id, email)
 }

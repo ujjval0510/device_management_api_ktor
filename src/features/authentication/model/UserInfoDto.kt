@@ -6,4 +6,18 @@ data class UserInfoDto(
     val role: Int,
     val email: String,
     var password: String? = null,
+    val firstName: String,
+    val lastName: String,
+    val designation: String,
+    val companyName:String,
+    val isDeleted: Boolean
+)
+
+data class UpdateUserInfoDto(
+    val id: Int? = null,
+    val firstName: String,
+    val lastName: String,
+    val designation: String,
+    val companyName:String,
+    val isDeleted: Boolean
 )

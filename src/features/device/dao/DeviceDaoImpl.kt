@@ -70,6 +70,10 @@ class DeviceDaoImpl(private val mapper: DeviceMapper) : DeviceDao {
         return deviceInfoDao;
     }
 
+    override fun getDeviceInfo(deviceId: Int): DeviceInfoDao {
+        TODO("Not yet implemented")
+    }
+
 
 //    override fun getDeviceInfo(deviceId: Int): Device {
 //        Database.connectToExampleDatabase()
