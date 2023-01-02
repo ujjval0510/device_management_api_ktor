@@ -8,4 +8,6 @@ interface DeviceData {
     suspend fun getAllDeviceList(): List<DeviceInfoDao>
     suspend fun updateDeviceData(requestDto: UpdateDeviceRequestDto): DeviceInfoDao
     suspend fun getDeviceInfo(deviceId: Int): DeviceInfoDao
+    suspend fun deleteDeviceData(deviceId: Int)
+
 }
