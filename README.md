@@ -8,6 +8,8 @@ pre-deployment setup
    tasks.create("stage") {
    dependsOn("installDist")
    }
+6. Create a file in root project structure name "Procfile", this file is specifically for Heroku is needed.
+    web: build/install/project_name(DeviceManagementApiKtor)/bin/project_name(DeviceManagementApiKtor)
 
 ## Steps for upload Ktor app in heroku
 
@@ -36,4 +38,18 @@ pre-deployment setup
 8. use heroku database and create tables in that. 
     USE database_name
     create all tables
+9. Create new branch "deployment" 
+    git checkout -b deployment
+10. Now we will commit some specific change only to deployment branch.
+    - git add Procfile build.gradle gradle/wrapper src/
+    - git status
+    - git commit -m "pre-deployment setup"
+    - git push
+    - git push heroku deployment
 
+#### Heroku always looks for master branch (if you don't have then you need to create master branch using below command)
+    - git checkout -b master (create branch from deployment branch only)
+    - git push heroku master
+    - Now we will get URL from heroku app so just copy.
+    - replace local url in postman with your lastet(heroku server) url.
+    - test all your api is working fine with Heroku server.
