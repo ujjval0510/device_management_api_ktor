@@ -1,0 +1,137 @@
+{
+  "info": {
+    "_postman_id": "7a63e842-e667-41b9-9a94-3f5925c12b2a",
+    "name": "dms-rest-api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "authentication",
+      "item": [
+        {
+          "name": "createUser",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"ujjval@gmail.com\",\n    \"employee_id\": \"1AW20AFSKAK8SA\",\n    \"role\": 1,\n    \"password\": \"654321\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/public-api/v1/authentication/createUser",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "public-api",
+                "v1",
+                "authentication",
+                "createUser"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"ujjval@gmail.com\",\n    \"password\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/public-api/v1/authentication/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "public-api",
+                "v1",
+                "authentication",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "userInfo",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBdXRoZW50aWNhdGlvbiIsImV4cCI6MTY2NDcwMTAzNiwiZW1haWwiOiJzZWxpbUBnbWFpbC5jb20ifQ.uCP0qpGFyVgl8mYPrgzMSXJ6VhDT49cYCZ9K_LAPtGI",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/authentication/userInfo",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "authentication",
+                "userInfo"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "getdevice",
+      "item": [
+        {
+          "name": "http://localhost:8080/api/v1/device/get-devices",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBdXRoZW50aWNhdGlvbiIsImV4cCI6MTY2NDcwMTAzNiwiZW1haWwiOiJzZWxpbUBnbWFpbC5jb20ifQ.uCP0qpGFyVgl8mYPrgzMSXJ6VhDT49cYCZ9K_LAPtGI",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/device/get-devices",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "device",
+                "get-device"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
