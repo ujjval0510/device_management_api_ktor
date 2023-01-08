@@ -29,8 +29,8 @@ import io.ktor.server.netty.Netty
 
 //fun main(args: Array<String>): Unit = io.ktor.server.tomcat.EngineMain.main(args)
 fun main() {
-    embeddedServer(Netty, port = System.getenv("PORT").toInt(), module = Application::module).start(wait = true)
-//    embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
+//    embeddedServer(Netty, port = System.getenv("PORT").toInt(), module = Application::module).start(wait = true)
+    embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
 }
 
 @Suppress("unused") // Referenced in application.conf
