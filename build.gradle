@@ -69,6 +69,9 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jodatime:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     implementation("org.slf4j:slf4j-nop:1.7.30")
+
+    implementation("io.ktor:ktor-server-cors:$ktor_version")
+
 //    implementation("org.postgresql:postgresql:42.2.2")
 //    implementation 'mysql:mysql-connector-java:8.0.15'
 //    implementation('mysql:mysql-connector-java:8.0.30')
