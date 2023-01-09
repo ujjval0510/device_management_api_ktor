@@ -5,6 +5,7 @@ import com.neci.features.authentication.dao.entity.UserTable
 import com.neci.features.authentication.dao.mapper.AuthenticationMapper
 import com.neci.features.authentication.model.LoginRequestDto
 import com.neci.features.authentication.model.UpdateUserInfoDto
+import com.neci.features.authentication.model.UserInfoDao
 import com.neci.features.authentication.model.UserInfoDto
 import com.neci.features.device.dao.entity.DeviceMasterTable
 import com.neci.features.device.model.DeviceInfoDao
@@ -87,5 +88,14 @@ class AuthenticationDaoImpl(private val mapper: AuthenticationMapper) : Authenti
                 it[updated_at] = LocalDateTime.now().toString()
             }
         }
+    }
+
+    override fun getAllUserList(): List<UserInfoDao> {
+        Database.connectToExampleDatabase()
+        val userList = transaction {
+            addLogger(StdOutSqlLogger)
+            return@transaction mapper.fromUserDaoToUserList(UserTable.selectAll().toList())
+        }
+        return userList
     }
 }
