@@ -2,6 +2,7 @@ package com.neci.features.authentication.routes
 
 import com.neci.features.authentication.routes.createUser.createUser
 import com.neci.features.authentication.routes.deleteUser.deleteUser
+import com.neci.features.authentication.routes.getallusers.getAllUsers
 import com.neci.features.authentication.routes.loginUser.loginUser
 import com.neci.features.authentication.routes.updateUser.updateUser
 import com.neci.features.authentication.routes.userInfo.userInfo
@@ -17,6 +18,7 @@ fun Application.authenticationRoutes() {
             updateUser()
             deleteUser()
         }
+        getAllUsers()
         createUser()
     }
 }

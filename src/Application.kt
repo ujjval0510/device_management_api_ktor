@@ -26,6 +26,7 @@ import org.koin.logger.SLF4JLogger
 import org.slf4j.event.Level
 import java.text.DateFormat
 import io.ktor.server.netty.Netty
+import io.ktor.server.plugins.cors.routing.*
 
 //fun main(args: Array<String>): Unit = io.ktor.server.tomcat.EngineMain.main(args)
 fun main() {
@@ -35,7 +36,9 @@ fun main() {
 
 @Suppress("unused") // Referenced in application.conf
 fun Application.module(testing: Boolean = false) {
-
+    install(CORS){
+        anyHost()
+    }
     install(Koin) {
         SLF4JLogger()
         modules(applicationModule, authenticationModule, deviceDataModule)
